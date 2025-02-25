@@ -1,0 +1,10 @@
+{
+  "ask_for_modules" : false,
+  "connection" : {
+    "connectorType" : "cwebsocketiowrapper",
+    "host" : "",
+    "port" : 0,
+    "protocol" : "",
+    "route" : ""
+  }
+}

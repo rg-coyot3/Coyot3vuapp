@@ -1,0 +1,1333 @@
+{
+  
+  "config" : {
+    "default_layout": "default",
+    "claim_modules_to_server" : false
+  }
+  ,"desktop" : {
+    "background" : {
+      "image" : ""
+      ,"css" : {
+
+      }
+    }
+  }
+  ,
+  "mods" : [
+    {
+      "name" : "constants"
+      ,"active" : true
+      ,"content" : {
+        
+        "js" : [
+          {
+            "script" : "/js/app/CDoorState.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/app/const_structs.js"
+            ,"init" : ""
+          }
+        ]
+        
+      }
+    },
+    {
+      "name" : "baselibs"
+      ,"active" : true
+      ,"content" : {
+        "css" : [
+           "/css/bootstrap/bootstrap.css"
+          ,"/css/jstree/style.css"
+          ,"/css/data_tooltip.css"
+          ,"/css/cyt_tools/cyt_common.css"
+          ,"/css/w2ui20/w2ui-2.0-milla.css"
+          ,"/css/openlayers/ol.css"
+          ,"/css/leaflet/leaflet.194.css"
+          ,"/css/jquery/jquery-ui.1.12.min.css"
+          ,"/css/jquery/jquery-ui.1.12-theme.min.css"
+
+        ],
+        "js" : [
+          
+          {
+            "script" : "/js/leaflet/leaflet.194.js"
+            ,"init" : ""
+          },
+
+          {
+            "script" : "/js/osm/ol.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/d3/d3.v3.min.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/d3/topojson.v2.min.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/d3/d3-zoom.v1.min.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/jquery/jquery-gauge-meter.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/jstree/jstree.js"
+            ,"init" : ""
+          },
+          {
+            "script" : "/js/leaflet/leaflet_osm.js"
+            ,"init" : ""
+          }
+          ,
+          {
+            "script" : "/js/cyt_tools/cyt_mod_dyntime_series_graph.js"
+            ,"init" : ""
+          }
+        ]
+      }
+    }
+    ,
+    {
+      "name" : "millabase"
+      ,"active" : true
+      ,"content" : {
+        "css" : [
+          "/css/winbox/winbox_milla_v02.css"
+          ,"/css/app/milla_main.css"
+          ,"/css/app/mod_milla_layout_toolbar_hor_down.css"
+
+        ],
+        "css_night" : [
+           "/css/winbox/winbox_milla_v02.css"
+          ,"/css/app/milla_main_night.css"
+          ,"/css/app/mod_milla_layout_toolbar_hor_down.css"
+        ]
+      }
+    }
+    ,
+    
+    {
+      "name" : "coverage_diagnostics"
+      ,"active" : false
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_coverage_diagnostics.css"]
+        ,"css_night" : ["/css/app/mod_milla_coverage_diagnostics_night.css"]
+        ,"html" : {
+          "title" : "COVERAGE DIAGNOSTICS"
+          ,"source" : "/module_coverage_diagnostics.html"
+          ,"icon" : "/img/icon_passengers_01.png"
+          ,"alias" : "/coverage_diagnostics"
+          ,"format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "0",
+            "y" : "0",
+            "w" : "400px",
+            "h" : "150px"
+          }
+        }
+      }
+    },
+
+    {
+      "name" : "passenger_interactions"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_passenger_interactions.css"],
+        "html" : {
+          "title" : "PASSENGERS INTERACTIONS",
+          "source" : "/module_passenger_interactions.html",
+          "icon" : "/img/icon_passengers_01.png",
+          "alias" : "/passenger_interactions"
+          ,"format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "5%",
+            "y" : "5%",
+            "w" : "600px"
+            ,"h" : "300px"
+          }
+        }
+        ,
+        "js" : [
+          
+
+          {
+            "script" : "/js/app/mod_passenger_interactions.js"
+            ,"init" : "MillaModPassengerInteractions.START()"
+          }
+        ]
+        
+      }
+    },
+    {
+      "name" : "information_messages"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_information_messages.css"],
+        "html" : {
+          "title" : "INFO-MSGS PANEL",
+          "source" : "/module_information_messages.html",
+          "icon" : "/img/icon_passengers_01.png",
+          "alias" : "/information_messages"
+          ,"format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "5%",
+            "y" : "5%",
+            "w" : "600px"
+            ,"h" : "300px"
+          }
+        }
+        ,
+        "js" : [
+          {
+            "script" : "/js/app/mod_information_messages.js"
+            ,"init" : "MillaModInformationMessages.START()"
+          }
+        ]
+        
+      }
+    }
+    ,
+    {
+      "name" : "vehicle_state"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_vehicle_state.css"],
+        "css_night" : ["/css/app/mod_milla_vehicle_state_night.css"],
+        "html" : {
+          "title" : "VEHICLE STATE",
+          "source" : "/module_vehicle_state.html",
+          "icon" : "/img/icon_shuttle_02.png",
+          "alias" : "/module_vehicle_state"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0",
+            "y" : "0",
+            "w" : "15%"
+            ,"h" : "100%"
+          }
+        }
+        ,
+        "js" : [
+          
+          {
+            "script" : "/js/app/mod_milla_vehicle_state.js"
+            ,"init" : "MillaVehicleStateManager.START()"
+          }
+        ]
+        
+      }
+    }
+    ,
+    {
+      "name" : "contextual_cartography"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_minimap.css"],
+        "html" : {
+          "title" : "CARTOGRAPHY",
+          "source" : "/module_contextual_cartography.html",
+          "icon" : "/img/icon_cartography_01.png",
+          "alias" : "/module_contextual_cartography"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "25%",
+            "w" : "55%"
+            ,"h" : "55%"
+          }
+        }
+        ,
+        "js" : [
+          
+          {
+            "script" : "/js/app/mod_milla_contextual_cartography.js"
+            ,"init" : "MillaContextualCartography.START()"
+          }
+        ]
+        
+      }
+    }
+    ,
+    {
+      "name" : "context_image"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_context_image.css"],
+        "html" : {
+          "title" : "VISUAL",
+          "source" : "/module_contextual_image.html",
+          "icon" : "/img/icon_camera_01.png",
+          "alias" : "/module_contextual_image"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "70%",
+            "y" : "0",
+            "w" : "30%"
+            ,"h" : "35%"
+          }
+        }
+        ,
+        "js" : [
+          
+          {
+            "script" : "/js/app/mod_milla_contextual_image_av.js"
+            ,"init" : "MillaContextualImageAv.START()"
+          }
+        ]
+        
+      }
+    }
+    ,
+    {
+      "name" : "video_source_selector"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_videosource_selector.css"],
+        "html" : {
+          "title" : "VIDEOSTREAM",
+          "source" : "/module_video_source_selector.html",
+          "icon" : "/img/icon_equalizer_01.png",
+          "alias" : "/module_video_source_selector"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "80%",
+            "w" : "20%"
+            ,"h" : "20%"
+          }
+        }
+        ,
+        "js" : [
+          
+          {
+            "script" : "/js/app/mod_milla_videosource_selector.js"
+            ,"init" : "MillaVideoSourceSelector.START()"
+          }
+        ]
+        
+      }
+    }
+    ,
+    {
+      "name" : "telecontrol_operations"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_teleoperation_functions.css"],
+        "html" : {
+          "title" : "TELEOPERATION",
+          "source" : "/module_teleoperation_functions.html",
+          "icon" : "/img/icon_operations_01.png",
+          "alias" : "/module_telecontrol_operations"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "80%",
+            "w" : "35%"
+            ,"h" : "20%"
+          }
+        }
+        ,
+        "js" : [
+          {
+            "script" : "/js/app/mod_milla_latency_management.js"
+            ,"init" : "LatencyManagement.START()"
+          },
+          {
+            "script" : "/js/app/mod_milla_teleoperation_functions.js"
+            ,"init" : "MillaTeleoperationFunctions.START()"
+          }
+        ]
+      }
+    }
+    ,
+    {
+      "name" : "telecontrol_operations_4demo"
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_teleoperation_functions.css"],
+        "html" : {
+          "title" : "T2E",
+          "source" : "/module_teleoperation_functions_4demo.html",
+          "alias" : "/module_telecontrol_operations_4demo"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "80%",
+            "w" : "40%"
+            ,"h" : "20%"
+          }
+        }
+        ,
+        "js" : [
+          {
+            "script" : "/js/app/mod_milla_teleoperation_functions_4demo.js"
+            ,"init" : "MillaTeleoperationFunctions4Demo.START()"
+          }
+        ]
+      }
+    }
+    ,
+    {
+      "name" : "notifications_and_logs"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_notifications.css"],
+        "html" : {
+          "title" : "NOTIFICATIONS",
+          "source" : "/module_notifications.html",
+          "icon" : "/img/icon_notifications_01.png",
+          "alias" : "/module_notifications"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "0%",
+            "w" : "55%"
+            ,"h" : "25%"
+          }
+        }
+        ,
+        "js" : [
+          
+          {
+            "script" : "/js/app/mod_milla_notifications.js"
+            ,"init" : "MillaNotificationFunctions.START()"
+          }
+        ]
+        
+      }
+    }
+
+    ,
+    {
+      "name" : "autodiagnostics_rawdiag_v02"
+      ,"active" : true
+      ,"content" : {
+        "css" : ["/css/app/mod_milla_autodiagnostics_ragg_v02.css"],
+        "html" : {
+          "title" : "DIAGNOSTICS",
+          "source" : "/module_autodiagnostics_ragg_v02.html",
+          "icon" : "/img/icon_diagnostics_01.png",
+          "alias" : "/module_autodiagnostics_ragg_v02"
+          ,"format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "70%",
+            "y" : "35%",
+            "w" : "30%"
+            ,"h" : "65%"
+          }
+        }
+        ,
+        "js" : [
+          {
+            "script" : "/js/app/mod_milla_autodiagnostics_ragg_v02.js"
+            ,"init" : "MillaAutoDiagnosticsDiAggV02.START()"
+          }
+        ]
+        
+      }
+    }
+    
+
+
+    
+  
+  ]
+  ,
+  "layouts": [
+    {
+      "id" : "default",
+      "name" : "Expo",
+      "icon" : "",
+      "active" : true,
+      "toolbar_fastaccess" : true,
+      "font_zoom_factor" : "",
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "15%"
+            ,"h" : "100%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "45%",
+            "y" : "0%",
+            "w" : "55%"
+            ,"h" : "70%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "25%",
+            "w" : "40%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "70%",
+            "y" : "0%",
+            "w" : "30%"
+            ,"h" : "22%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "0%",
+            "w" : "30%"
+            ,"h" : "70%"
+          }
+        }
+
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "70%",
+            "w" : "50%"
+            ,"h" : "30%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations_4demo",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "70%",
+            "w" : "35%",
+            "h" : "30%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "70%",
+            "w" : "35%",
+            "h" : "30%"
+          }
+        }
+
+        ,
+        {
+          "content_id" : "passenger_interactions",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "70%",
+            "w" : "25%",
+            "h" : "30%"
+          }
+        }
+
+
+      ]
+    },
+    {
+      "id" : "drivers_choice",
+      "name" : "Drivers choice",
+      "icon" : "",
+      "active" : true,
+      "toolbar_fastaccess" : true,
+      "font_zoom_factor" : "",
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "13%"
+            ,"h" : "100%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "13%",
+            "y" : "22%",
+            "w" : "87%"
+            ,"h" : "58%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "25%",
+            "w" : "40%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "70%",
+            "y" : "0%",
+            "w" : "30%"
+            ,"h" : "22%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "15%",
+            "y" : "15%",
+            "w" : "70%"
+            ,"h" : "70%"
+          }
+        }
+
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "13%",
+            "y" : "0%",
+            "w" : "57%"
+            ,"h" : "22%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "13%",
+            "y" : "80%",
+            "w" : "47%",
+            "h" : "20%"
+          }
+        }
+        ,
+        {
+          "content_id" : "passenger_interactions",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "80%",
+            "w" : "40%",
+            "h" : "20%"
+          }
+        }
+
+      ]
+    },
+    {
+      "id" : "teleopalt",
+      "name" : "Teleop Alternative",
+      "icon" : "",
+      "active" : true,
+      "toolbar_fastaccess" : false,
+      "components" : [
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "83%",
+            "y" : "0%",
+            "w" : "17%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "16%",
+            "w" : "50%"
+            ,"h" : "24%"
+          }
+        }
+        ,
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "60%"
+            ,"h" : "32%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "32%",
+            "w" : "60%"
+            ,"h" : "68%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "0%",
+            "w" : "40%"
+            ,"h" : "40%"
+          }
+        }
+        ,    
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "40%",
+            "w" : "40%"
+            ,"h" : "40%"
+          }
+        }
+        ,    
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "40%",
+            "w" : "40%"
+            ,"h" : "40%"
+          }
+        }
+        
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "60%",
+            "y" : "80%",
+            "w" : "40%",
+            "h" : "20%"
+          }
+        }
+
+      ]
+    },
+    {
+      "id" : "monitoring",
+      "name" : "Monitoring",
+      "active" : true,
+      "toolbar_fastaccess" : false,
+      "icon" : "",
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "65%"
+            ,"h" : "30%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "30%",
+            "w" : "65%"
+            ,"h" : "70%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "0%",
+            "w" : "35%"
+            ,"h" : "60%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "83%",
+            "y" : "0%",
+            "w" : "17%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "60%",
+            "w" : "35%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "60%",
+            "w" : "35%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "16%",
+            "w" : "50%"
+            ,"h" : "24%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "85%",
+            "w" : "33%",
+            "h" : "15%"
+          }
+        }
+
+      ]
+    },
+    {
+      "id" : "alter",
+      "name" : "Alternative",
+      "icon" : "",
+      "active" : true,
+      "toolbar_fastaccess" : false,
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "83%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "16%",
+            "w" : "50%"
+            ,"h" : "94%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "83%",
+            "y" : "40%",
+            "w" : "17%"
+            ,"h" : "60%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "83%",
+            "y" : "0%",
+            "w" : "17%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "40%",
+            "w" : "33%"
+            ,"h" : "45%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "40%",
+            "w" : "33%"
+            ,"h" : "45%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "16%",
+            "w" : "50%"
+            ,"h" : "24%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "85%",
+            "w" : "33%",
+            "h" : "15%"
+          }
+        }
+
+      ]
+    }
+    ,
+    {
+      "id" : "vert",
+      "name" : "Vertical",
+      "icon" : "",
+      "active" : true,
+      "toolbar_fastaccess" : false,
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "100%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "16%",
+            "w" : "100%"
+            ,"h" : "17%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "33%",
+            "y" : "33%",
+            "w" : "67%"
+            ,"h" : "32%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "33%",
+            "w" : "33%"
+            ,"h" : "10%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "43%",
+            "w" : "33%"
+            ,"h" : "22%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "65%",
+            "w" : "100%",
+            "h" : "10%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "75%",
+            "w" : "100%"
+            ,"h" : "25%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "75%",
+            "w" : "100%"
+            ,"h" : "25%"
+          }
+        }
+
+
+
+      ]
+    }
+    ,
+    {
+      "id" : "cartog",
+      "name" : "Cartography",
+      "active" : true,
+      "toolbar_fastaccess" : true,
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "13%"
+            ,"h" : "100%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "13%",
+            "y" : "0%",
+            "w" : "87%"
+            ,"h" : "100%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "0%",
+            "w" : "35%"
+            ,"h" : "60%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "83%",
+            "y" : "0%",
+            "w" : "17%"
+            ,"h" : "16%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "60%",
+            "w" : "35%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "60%",
+            "w" : "35%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "16%",
+            "w" : "50%"
+            ,"h" : "24%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "50%",
+            "y" : "85%",
+            "w" : "33%",
+            "h" : "15%"
+          }
+        }
+
+      ]
+    }
+    ,
+    {
+      "id" : "cartog_data",
+      "name" : "Details",
+      "active" : true,
+      "toolbar_fastaccess" : false,
+      "components" : [
+        {
+          "content_id" : "vehicle_state",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "0%",
+            "w" : "65%"
+            ,"h" : "30%"
+          }
+        }
+        ,
+        {
+          "content_id" : "passenger_interactions",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "30%",
+            "w" : "40%"
+            ,"h" : "25%"
+          }
+        }
+        ,
+        {
+          "content_id" : "contextual_cartography",
+          "format" : {
+            "minimized" : true,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "0%",
+            "w" : "35%"
+            ,"h" : "40%"
+          }
+        }
+        ,
+        {
+          "content_id" : "context_image",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "0%",
+            "w" : "35%"
+            ,"h" : "50%"
+          }
+        }
+        ,
+        {
+          "content_id" : "video_source_selector",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "40%",
+            "y" : "30%",
+            "w" : "25%"
+            ,"h" : "25%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "50%",
+            "w" : "35%"
+            ,"h" : "50%"
+          }
+        }
+        ,
+        {
+          "content_id" : "autodiagnostics_rawdiag_v02",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "65%",
+            "y" : "50%",
+            "w" : "35%"
+            ,"h" : "50%"
+          }
+        }
+        ,
+        {
+          "content_id" : "notifications_and_logs",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "55%",
+            "w" : "65%"
+            ,"h" : "25%"
+          }
+        }
+        ,
+        {
+          "content_id" : "telecontrol_operations",
+          "format" : {
+            "minimized" : false,
+            "maximized" : false,
+            "x" : "0%",
+            "y" : "80%",
+            "w" : "65%",
+            "h" : "20%"
+          }
+        }
+
+      ]
+    }
+  ]
+}
