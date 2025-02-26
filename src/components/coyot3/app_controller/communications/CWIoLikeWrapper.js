@@ -21,7 +21,7 @@
  */
 
 
-export class CWebsocketIoWrapper {
+export class CWIoLikeWrapper {
   constructor(config){
     this.config = {
       source : config,
@@ -55,7 +55,7 @@ export class CWebsocketIoWrapper {
       this.config.hostname = window.location.hostname;
       this.config.port = window.location.port;
       this.config.protocol = (window.location.protocol == 'http:' ? 'ws:' : 'wss:');
-      this.vars.connectionchain = `${this.config.protocol}//${this.config.source.hostname};${this.config.source.port}`;
+      this.vars.connectionchain = `${this.config.protocol}//${this.config.source.hostname};${this.config.source.port}/coyot3/ws`;
     }
     console.log(`constructed ${typeof(this.config.source)} : ${this.vars.connectionchain}`)
     this.open();
@@ -178,7 +178,7 @@ export class CWebsocketIoWrapper {
     try{
       this.instances.send(JSON.stringify(packet) + '\r\n');
     }catch(err){
-      console.error(`cwebsocketiowrapper : emit : error sending message (${err})`);
+      console.error(`CWIoLikeWrapper : emit : error sending message (${err})`);
       return false;
     }
     return true;

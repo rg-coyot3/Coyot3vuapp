@@ -1,9 +1,13 @@
 <script setup>
-import { ref , reactive, onMounted }  from 'vue'
+import { ref , reactive, onMounted, defineProps }  from 'vue'
 import CDesktopWebapp from './components/coyot3/desktop_webapp/CDesktopWebapp.vue'
 
-const title="hola mundo";
-
+const props = defineProps({
+  config : {
+    type : Object,
+    required : true
+  }
+});
 let desktopApp = ref();
 
 onMounted( () => {
@@ -20,6 +24,7 @@ onMounted( () => {
 
 <CDesktopWebapp
   ref="desktopApp"
+  :config="props.config"
 ></CDesktopWebapp>
 
 </template>

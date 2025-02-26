@@ -140,7 +140,7 @@ export let Tools = {
     xhr.send();
   }
   ,LoadExternalHtmlContent : function(url,callback_on_loaded){
-    var instance = $('<span></span>');
+    var instance = $('<span></span>').clone();
     if((window.document.CTARGET_CHAIN != "") && (url.startsWith('http')==false)){
       url = window.document.CTARGET_CHAIN + url;
     }

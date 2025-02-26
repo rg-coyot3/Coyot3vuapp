@@ -1,4 +1,4 @@
-import { CWebsocketIoWrapper } from "./communications/CWebsocketIoWrapper";
+import { CWIoLikeWrapper } from "./communications/CWIoLikeWrapper";
 import { io } from "socket.io-client" 
 
 
@@ -22,8 +22,8 @@ export class AppControll3r{
     this.config = {
       source : config,
       comms : {
-        cwebsocketiowrapper : {
-            constructor : function(config){return new CWebsocketIoWrapper(config);}
+        CWIoLikeWrapper : {
+            constructor : function(config){return new CWIoLikeWrapper(config);}
           , instance : null
           , reconnectionth : null
           , subscriptions : {}
@@ -120,18 +120,17 @@ export class AppControll3r{
 
 
   connect(){
-    let conf = this.config.source;
-    if(conf.comms.connectorType.length == 0) conf.comms.connectorType = 'cwebsocketiowrapper';
-    if(conf.comms.host.length == 0) conf.comms.host = window.location.hostname;
-    if(conf.comms.port == 0)        conf.comms.port = window.location.port;
-    if(conf.comms.protocol.length == 0)conf.comms.protocol = (window.location.protocol == 'http:' ? 'ws:' : 'wss:');
-    let cchain = conf.comms.protocol + '//' + conf.comms.host.toString() + ":" + conf.comms.port.toString();
-    this.instances.comms.socket_interface = this.config.comms[conf.comms.connectorType];
+    
+    let connectorType = 'CWIoLikeWrapper';
+    
+    let wsproto = (window.location.protocol == 'http:' ? 'ws:' : 'wss:');
+    let cchain = `${wsproto}//${window.location.hostname}:${window.location.port}/coyot3/ws`;
+    this.instances.comms.socket_interface = this.config.comms[connectorType];
     if(this.instances.comms.socket_interface == undefined){
-      log.error(`capp-controller : the connector [${conf.comms.connectorType}] is NOT defined!. stopping process`);
+      log.error(`capp-controller : the connector [${connectorType}] is NOT defined!. stopping process`);
       return false;
     }
-    console.log(`capp-controller : creating instance of [${conf.comms.connectorType}}] to connect to [${cchain}]`)
+    console.log(`capp-controller : creating instance of [${connectorType}}] to connect to [${cchain}]`)
     this.instances.comms.socket_interface.instance = new this.instances.comms.socket_interface.constructor(cchain);
     this.instances.comms.socket_interface.instance.on('connection',this._on_connection.bind(this));
     this.instances.comms.socket_interface.instance.on('disconnect',this._on_discomms.bind(this));

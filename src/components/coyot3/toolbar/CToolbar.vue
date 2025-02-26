@@ -35,7 +35,7 @@ switch(params.options.position){
       position:absolute;
       top: 0;
       left:0;
-      height: ${params.options.width};
+      height: ${params.options.width}px;
       width:100%;
       border-bottom: 1px solid black;
     `;
@@ -47,7 +47,7 @@ switch(params.options.position){
       top: 0;
       left:0;
       height:100%;
-      width: ${params.options.width};
+      width: ${params.options.width}px;
       border-right: 1px solid black;
     `;
     break;
@@ -61,13 +61,13 @@ switch(params.options.position){
       border-left: 1px solid black;
     `;
     break;
-  case 'down':
+  case 'bottom':
   default:
     tbcontainerstyle = `
       position:absolute;
       bottom: 0;
       left:0;
-      height: ${params.options.width};
+      height: ${params.options.width}px;
       width:100%;
       border-top: 1px solid black;
     `;

@@ -42,6 +42,7 @@ export class ToolbarManager {
         { type: 'break' , id : "apps-instances-ep"},
         { type: 'break' },
         { type: 'spacer' , id : "spacer-a"},
+        { type: 'break' },
         { type: 'break' , id : "layouts-selectors-ep"},
         { type: 'break' , id : "rightest-zone"},
       ]

@@ -67,6 +67,7 @@ server.listen(8080, () => {
 
 const wss = new WebSocketServer({
   server : server,
+  path : '/coyot3/ws',
   autoAcceptConnections : false,
   perMessageDeflate: {
     zlibDeflateOptions: {

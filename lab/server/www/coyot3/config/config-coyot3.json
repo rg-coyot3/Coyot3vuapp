@@ -1,0 +1,135 @@
+{
+  "config" : {
+    "default_layout": "default",
+    "ask_mods_to_server" : false
+  }
+  ,"d3sktop" : {
+    "toolbar" : {
+      "position" : "bottom",
+      "size" : 40
+    },
+    "background" : {
+      "image" : ""
+      ,"css" : {
+
+      }
+    }
+  }
+  , "modul3s" : {
+    "commons" : {
+      "wbconf" : {
+        "options" : {
+
+        }
+      }
+    },
+    "mods" : [
+      {
+        "name" : "baselibs"
+        ,"active" : true
+        ,"content" : {
+          "css" : [ "/coyot3/dependences/winbox/css/winbox.cmod.css",
+                    "/coyot3/dependences/winbox/css/themes/modern.min.css",
+                    "/coyot3/dependences/winbox/css/themes/white.min.css",
+                    "/coyot3/dependences/winbox/css/themes/winbox.coyot3.css"
+          ],
+          "js" : [
+            
+            {
+              "script" : "/coyot3/dependences/winbox/js/winbox.min.adapt.js"
+              ,"init" : ""
+            }
+          ]
+        }
+      }
+      ,{
+        "name" : "example1"
+        ,"active" : true
+        ,"content" : {
+          "css" : [ "/coyot3/components/example/example.css" ],
+          "html" : {
+              "title" : "EXAMPLE 1"
+            , "source": "/coyot3/components/example/example.html"
+            , "alias" : "/coyot3/components/example/example.html"
+            , "format": {
+                "minimized" : false
+              , "maximized" : false
+              , "x" : 0
+              , "y" : 0
+              , "w" : 600
+              , "h" : "100%"
+            }
+          }
+          ,"js" : [
+            {
+              "script" : "/coyot3/components/example/example.js",
+              "init" : "window.CAppControll3r.add_module(new ExampleManagerClass('example1'),'example1',true)"
+            }
+          ]
+        }
+      }
+      ,{
+        "name" : "example2"
+        ,"active" : true
+        ,"content" : {
+          "css" : [ "/coyot3/components/example/example.css" ],
+          "html" : {
+              "title" : "EXAMPLE 2"
+            , "source": "/coyot3/components/example/example.html"
+            , "alias" : "/coyot3/components/example/example.html"
+            , "format": {
+                "minimized" : false
+              , "maximized" : false
+              , "x" : 600
+              , "y" : 0
+              , "w" : 600
+              , "h" : "100%"
+            }
+          }
+          ,"js" : [
+            {
+              "script" : ":none:",
+              "init" : "window.CAppControll3r.add_module(new ExampleManagerClass('example2'),'example2',true)"
+            }
+          ]
+        }
+      }
+    ]
+    ,
+    "layouts": [
+      {
+        "id" : "default",
+        "name" : "Expo",
+        "icon" : "",
+        "active" : true,
+        "toolbar_fastaccess" : true,
+        "font_zoom_factor" : "",
+        "components" : [
+          {
+            "content_id" : "example1",
+            "format" : {
+              "minimized" : false
+              , "maximized" : false
+              , "x" : 0
+              , "y" : 0
+              , "w" : "50%"
+              , "h" : "50%"
+            }
+          },
+          {
+            "content_id" : "example2",
+            "format" : {
+              "minimized" : false
+              , "maximized" : false
+              , "x" : "50%"
+              , "y" : "50%"
+              , "w" : "50%"
+              , "h" : "50%"
+            }
+          }
+
+        ]
+      }
+    ]
+  }
+}
