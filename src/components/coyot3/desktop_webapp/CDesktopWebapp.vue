@@ -1,7 +1,12 @@
 <script setup>
-import { ref, onMounted} from 'vue'
+import  { createVNode, render, ref, onMounted } from 'vue'
+import { Tools } from '../tools/ctools';
 import CToolbar from '../toolbar/CToolbar.vue';
 import CDesktopWebapp  from './CDesktopWebapp.js';
+import SysIcon from '../sysicon/SysIcon.vue'
+
+
+
 //vars
   //input
 const props = defineProps({
@@ -46,18 +51,34 @@ const props = defineProps({
     default:
       viewportStyle=`position: absolute; bottom: ${viewport.bottom}px;right : 0; width: 100vw; height : calc( 100vh - ${viewport.top}px);`;
   }
+  viewportStyle+=Tools.json2cssstring(props.config.d3sktop.background.css)
   console.log(`VIEWPORT!!! : ${viewportStyle}`)
-
+  
+  //sysicon.appContext = this.__appContext;
 //constr
 onMounted( () => {
-  let conf = {...props.config};
-  //
+    //
+    let conf = {...props.config};
   conf.d3sktop.viewport = viewport;
   conf.d3sktop.viewportRoot = 'desktopviewport';
-  console.log(`mounted desktop webapp vue`);
+
+  // desktop webapp
   let manager = new CDesktopWebapp(conf);
   manager.setToolbar(ctoolbar.value.manager());
-  //modul3xample.value.setviewport(viewport);
+  
+
+
+  //systry connection icon
+  let sysicon = createVNode(SysIcon, Object.assign({...props},{appController : manager.appcontroller()}));
+  let dsystrconnectionicon = document.createElement('div');
+  render(sysicon,dsystrconnectionicon);
+  //console.log(Tools.stringify(sysicon))
+  sysicon.component.exposed.boolean_function.value = manager.appcontroller().is_connected.bind(manager.appcontroller());
+  manager.add_widget_icon(dsystrconnectionicon,'ws-connected',manager.on_widget_icon_clicked.bind(manager));
+  
+
+
+
   window.CAppControll3r = manager.appcontroller();
   manager.Init();
   manager.Start();
@@ -74,7 +95,7 @@ onMounted( () => {
   <div id="desktopviewport" :style="viewportStyle"></div>
   <CToolbar 
     ref="ctoolbar"
-    :options="cdconf.toolbar.options"
+    :config="props.config"
   />
 
   <!--CModul3xtContent
@@ -84,5 +105,10 @@ onMounted( () => {
 
   
 </template>
+<style scoped>
+.foobar{
+  background-color: rgb(203, 255, 243);
+}
 
+</style>
 

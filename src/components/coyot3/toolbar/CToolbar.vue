@@ -5,11 +5,11 @@ import { ToolbarManager } from './CToolbar.js';
 import 'w2ui/w2ui-2.0.css';
 
 
-const params = defineProps({
+const props = defineProps({
   title : {
     type : String
   },
-  options : {
+  config : {
     type : Object,
     required : true
   }
@@ -17,25 +17,25 @@ const params = defineProps({
 const emit = defineEmits([]);
 // give each todo a unique id
 let id = 0;
+let conf = {...props.config};
+conf.d3sktop.toolbar.selector = '#ctoolbar';
+conf.d3sktop.toolbar.id = 'maintoolbar';
 
-let toolbarManager = new ToolbarManager({
-  selector : '#ctoolbar',
-  id : 'maintoolbar',
-  options : params.options
-});
+let toolbarManager = new ToolbarManager(conf);
 
 toolbarManager.onRendered = () => {
   
 };
-
+const tbwidth = props.config.d3sktop.toolbar.size;
+const tbposition = props.config.d3sktop.toolbar.position;
 let tbcontainerstyle = null;
-switch(params.options.position){
+switch(tbposition){
   case 'top':
     tbcontainerstyle = `
       position:absolute;
       top: 0;
       left:0;
-      height: ${params.options.width}px;
+      height: ${tbwidth}px;
       width:100%;
       border-bottom: 1px solid black;
     `;
@@ -47,7 +47,7 @@ switch(params.options.position){
       top: 0;
       left:0;
       height:100%;
-      width: ${params.options.width}px;
+      width: ${tbwidth}px;
       border-right: 1px solid black;
     `;
     break;
@@ -57,7 +57,7 @@ switch(params.options.position){
       top: 0;
       right:0;
       height:100%;
-      width: ${params.options.width};
+      width: ${tbwidth};
       border-left: 1px solid black;
     `;
     break;
@@ -67,7 +67,7 @@ switch(params.options.position){
       position:absolute;
       bottom: 0;
       left:0;
-      height: ${params.options.width}px;
+      height: ${tbwidth}px;
       width:100%;
       border-top: 1px solid black;
     `;

@@ -221,10 +221,15 @@ export class CEnvironmentManager {
     //this.initialize_incoming_modules_list();
     
   }
+
+
+
+
   propagate_after_initialization_actions(){
         setTimeout( () => {
         this.controller.add_layout_selector("Tiled", "lo-tiled");
         this.controller.add_layout_selector("Cascade", "lo-cascade");
+        let newElement = document.createElement('div');
         Object.keys(this.vars.layouts).forEach( (loid) => {
           this.controller.add_layout_selector(this.vars.layouts[loid].name(),`lo-${this.vars.layouts[loid].id()}`);
         });
@@ -234,6 +239,9 @@ export class CEnvironmentManager {
       },1500);
 
   }
+
+
+
   set_default_layout(){
     try{
       this._organize_windows_layout("default");
@@ -256,6 +264,7 @@ export class CEnvironmentManager {
     return this.instances.contents.html[target];
   }
 
+  //the entry point for the initialization.
   initialize_incoming_modules_list(){
     if(this.vars.module_initialization_index >= Object.keys(this.vars.modules.list).length){
       console.log(`cyt-modules-manager : all modules initialized`);
@@ -264,7 +273,7 @@ export class CEnvironmentManager {
     }
     this._initialize_module(this.vars.modules.list[Object.keys(this.vars.modules.list)[this.vars.module_initialization_index]]);
   }
-
+  //all modules will be loading one by one...
   _initialize_module_prepare_next(){
     this.vars.module_initialization_index++;
     this.initialize_incoming_modules_list();
@@ -722,7 +731,7 @@ export class CEnvironmentManager {
   {
     let loi = this.vars.layouts[loname];
     
-    console.log(`**** ${JSON.stringify(loi,null,'\t')}`);
+    //console.log(`**** ${JSON.stringify(loi,null,'\t')}`);
 
     Object.keys(this.vars.layouts[loname].component()).forEach( ck => {
       //console.log(`**** ${ck}`)

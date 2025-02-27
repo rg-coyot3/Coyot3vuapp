@@ -49,7 +49,8 @@ export let Tools = {
   ,getCircularReplacer : () => {
     const seen = new WeakSet();
     return (key, value) => {
-      if (typeof value === "object" && value !== null) {
+      if (typeof value === 'function' ) return '' + value;
+      else if (typeof value === "object" && value !== null) {
         if (seen.has(value)) {
           return;
         }
@@ -57,6 +58,13 @@ export let Tools = {
       }
       return value;
     };
+  }
+  ,json2cssstring(obj){
+    let s = "";
+    Object.keys(obj).forEach( k => {
+      s+=`${k}: ${obj[k]};`
+    });
+    return s;
   }
   ,stringify(o){
     return JSON.stringify(o,Tools.getCircularReplacer());

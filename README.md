@@ -27,6 +27,10 @@ From one side:
 
 ![alt text](doc/image-2.png)
 
+Anyways, I am aware of the benefits of using react... or angular... so I tried to build me some kind of standalone front-end that permitted me to use the *widgets* that the community provide, BUT... I was blocked and I found vue much easier to learn. However, at the end... this requires a set of knowledges and disciplines that I am yet not able to reach, and even if throw this mini-packet I am learning a little bit of Vue3, I always finish satisfying my needs with these kind of hibrid self-cooked solutions.
+
+
+
 
 ## THE CONTAINER
 

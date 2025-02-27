@@ -1,9 +1,10 @@
-import {w2ui, w2toolbar} from 'w2ui'
-
+import {w2ui, query, w2toolbar} from 'w2ui'
+import { Tools } from '../tools/ctools'
 /**
  * method: add_application_selector(text,id,callbackOnClick,options)
  * method: add_startup_menu_option(text,id,callbackOnClick,options)
  * method: add_layout_selector(text, id, callbackOnClick, options)
+ * method: add_toolbar_widget(elinstance, id, callbackOnClick?, options)
  * -- emits
  * event : on-toolbar-option-click , 'text'
  * -- slots
@@ -15,17 +16,17 @@ export class ToolbarManager {
   constructor(config){
     this.config = {
       source    : config , 
-      selector  : config.selector,
-      id        : config.id,
+      selector  : config.d3sktop.toolbar.selector,
+      id        : config.d3sktop.toolbar.id,
 
       styles : {
         mainToolbar : `border-top: 1px solid black; background-color: blue`,
         button : ``, 
       },
-      toolbarMainMenu : { type: 'menu', id: 'main-menu', text: 'APP', icon: 'fa fa-camera',
+      toolbarMainMenu : { type: 'menu', id: 'main-menu', text: 'APP', style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css),
         items: [
-          { text : '--' , id : 'main-menu-sep-02'},
-          { text: 'About', id : 'main-menu-about' , icon: 'fa fa-camera'},
+          { text : '--' , id : 'main-menu-sep-02',style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css)},
+          { text: 'About', id : 'main-menu-about' , icon: 'fa fa-camera',style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css)},
         ]
       }
     }
@@ -48,7 +49,8 @@ export class ToolbarManager {
       ]
       ,layoutSelectorsInfo : {
         "@" : "nameOfTheDistribution"
-      }
+      },
+      im_rendered : false
     }
     
   }
@@ -73,26 +75,77 @@ export class ToolbarManager {
       id   : id,
       text : l,
       tooltip : text, 
-      onClick : (callbackOnClick === undefined?null:callbackOnClick),
+      onClick : (callbackOnClick === undefined?null:callbackOnClick)
+      ,style : Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.selectors.css)
     }
     this.instances.container.insert("layouts-selectors-ep",v);
   }
+  __defer_til_rendered(func,...args){
+    if(this.vars.im_rendered === true)return false;
+    setTimeout(() => {
+      console.log(`CTOOLBAR : DEFERRED ACTION : `);
+      if(this.vars.im_rendered === false)return this.__defer_til_rendered(func,...args);
+      func(...args);
+    },1000);
+    return true;
+  }
+  add_toolbar_widget(element, id, callbackOnClick, options){
+    console.log( `CTOOLBAR: adding widget : ${id}`);
+    if(this.__defer_til_rendered(
+        this.add_toolbar_widget.bind(this),
+        element,
+        id,
+        callbackOnClick,
+        options)== true)
+      return true;
+
+
+    let self = this;
+    let v = {
+      type : 'html',
+      id   : id,
+      onClick : (callbackOnClick === undefined?null:callbackOnClick),
+      async onRefresh(event){
+        await event.complete;
+        query(this.box).find(`#tb_${self.config.source.d3sktop.toolbar.id}_item_${id}`).append(element);
+      }
+      
+    }
+    this.instances.container.insert("rightest-zone",v);
+  }
   add_application_selector(text,id,callbackOnClick,options){
+    if(this.__defer_til_rendered(
+      this.add_application_selector.bind(this),
+      text,
+      id,
+      callbackOnClick,
+      options)== true)
+    return true;
     let v = {
       type : 'button',
       id   : id,
       text : text,
       onClick : (callbackOnClick === undefined?null:callbackOnClick),
+      style : Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.selectors.css)
     }
     if(this.instances.container== null) {this.vars.toolbarItems.push(v);return;}
     this.instances.container.insert("apps-instances-ep",v);
   }  
   add_application_selector_(text,id,callbackOnClick,options){
+    if(this.__defer_til_rendered(
+      this.add_application_selector.bind(this),
+      text,
+      id,
+      callbackOnClick,
+      options)== true)
+    return true;
+
     let v = {
       type : 'button',
       id   : id,
       text : text,
-      onClick : (callbackOnClick === undefined?null:callbackOnClick),
+      onClick : (callbackOnClick === undefined?null:callbackOnClick)
+      
 
 
     }
@@ -120,6 +173,7 @@ export class ToolbarManager {
       this.controller.add_startup_menu_option = this.add_startup_menu_option.bind(this);
       this.controller.add_application_selector = this.add_application_selector.bind(this);
       this.controller.add_layout_selector = this.add_layout_selector.bind(this);
+      this.controller.add_toolbar_widget = this.add_toolbar_widget.bind(this);
       this.controller.on('add-window-selector', this.add_application_selector.bind(this) )
       this.controller.on('add-startup-option', this.add_startup_menu_option.bind(this) )
       
@@ -148,6 +202,8 @@ export class ToolbarManager {
         style : 'border-top: 1px solid black',
         items: self.vars.toolbarItems
         ,onRender(event){
+          console.log(`CTOOLBAR I'M RENDERED`)
+          self.vars.im_rendered = true;
           self.vars.initialized = true;
           if(self.onRendered === undefined)return;
           self.onRendered();
@@ -158,10 +214,14 @@ export class ToolbarManager {
           self.controller.signal_event("on-toolbar-option-click",event.target);
 
         }
+        ,onRefresh : function(evt){
+
+        },
+        style : Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.bar.css)
       }
 
     );
-  
+  console.log(`TOOLBAR STYLE: ${Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.bar.css)}`)
   }
 
   _render(){

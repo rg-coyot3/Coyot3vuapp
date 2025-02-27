@@ -6,12 +6,29 @@
   ,"d3sktop" : {
     "toolbar" : {
       "position" : "bottom",
-      "size" : 40
+      "size" : 40,
+      "style" : {
+        "bar" : {
+          "css" : {
+            "border-top" : "2px solid blue",
+            "background-color" : "rgb(203, 255, 243)"
+          }
+        },
+        "selectors" : {
+          "css" :{
+            "font-weight" : "bolder",
+            "border" : "2px solid gray",
+            "border-radius" : "3px",
+            "text-align" : "center"
+          }
+          
+        }
+      }
     },
     "background" : {
-      "image" : ""
-      ,"css" : {
-
+      "css" : {
+        "background-image" : "url(/coyot3/assets/wileec.jpg)",
+        "background-size" : "contain"
       }
     }
   }

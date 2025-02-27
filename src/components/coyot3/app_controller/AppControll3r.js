@@ -275,11 +275,14 @@ export class AppControll3r{
   //
   _on_connection(){
     console.warn(`connected`)
+    this.vars.is_connected = true;
   }
   _on_discomms(){
     console.warn(`disconnected`)
+    this.vars.is_connected = false;
     setTimeout(() => {this.instances.comms.socket_interface.instance.open()},5000);
   }
+  is_connected(){return this.vars.is_connected;}
 
   _on_error(){
 

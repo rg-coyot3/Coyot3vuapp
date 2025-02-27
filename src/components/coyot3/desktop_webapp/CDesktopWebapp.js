@@ -1,6 +1,6 @@
 import { AppControll3r } from '../app_controller/AppControll3r.js';
 import { CEnvironmentManager } from '../cenvironmentmanager/CEnvironmentManager.js';
-import { Tools } from '../tools/ctools.js'
+
 /*
   config : {
     controller : {
@@ -43,6 +43,7 @@ export default class CDesktopWebapp{
       appcontroller : null,
       toolbarmanager : null,
       environmentmanager : null,
+      widgetIcons : []
     }
     this.vars = {
       source_port_tests_index : 0
@@ -61,43 +62,44 @@ export default class CDesktopWebapp{
   setToolbar(t){
     this.instances.toolbarmanager = t;
     this.instances.toolbarmanager.appcontroller(this.instances.appcontroller);
-    this.instances.toolbarmanager.Init();
-    this.instances.toolbarmanager.Start();
-    this.construction_bis(this.config.source);
+
   }
 
-  construction_bis(cenvironmentConfig){
-    //console.log(`cdesktop-webapp : continuing constructor`)
-    this.instances.appcontroller.connect();
-
-    //setTimeout(() => {
-      //config:
-      this.instances.environmentmanager.configure_workspace_context(cenvironmentConfig);
-      this.instances.environmentmanager.Init();
-      this.instances.environmentmanager.Start();
-      
-      this.instances.appcontroller.Init();
-      this.instances.appcontroller.Start();
-    //},2000);
-    
+  add_widget_icon(widgetIcon,id){
+    widgetIcon.onclick = this.on_widget_icon_clicked.bind(this,`${id}`);
+    this.instances.widgetIcons.push({instance: widgetIcon, id : id});
   }
-
-
-
+  on_widget_icon_clicked(widgetId){
+    console.log(`cdesktopvuapp : on-widget-clicked : ${widgetId}`);
+  }
   add_module(m){
 
   }
   Init(){
+    console.log(`cdesktop-webapp : init`)
+    this.instances.appcontroller.connect();
+    this.instances.appcontroller.Init();
+    this.instances.appcontroller.Start();
+
     this.instances.toolbarmanager.Init();
     this.instances.toolbarmanager.Start();
+
+
     
   }
   Start(){
     
+    console.log(`cdesktop-webapp : init`)
+    this.instances.environmentmanager.configure_workspace_context(this.config.source);
+    this.instances.environmentmanager.Init();
+    this.instances.environmentmanager.Start();
 
-    
 
     this.instances.appcontroller.Init();
     this.instances.appcontroller.Start();
+
+    this.instances.widgetIcons.forEach( i => {
+      this.instances.toolbarmanager.add_toolbar_widget(i.instance,i.id,this.on_widget_icon_clicked.bind(this));
+    });
   }
 };
