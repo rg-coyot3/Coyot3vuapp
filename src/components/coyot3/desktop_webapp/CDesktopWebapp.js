@@ -100,6 +100,18 @@ export default class CDesktopWebapp{
 
     this.instances.widgetIcons.forEach( i => {
       this.instances.toolbarmanager.add_toolbar_widget(i.instance,i.id,this.on_widget_icon_clicked.bind(this));
+      setTimeout(() => {
+        this.instances.appcontroller.add_menu_option('UNO','option-uno')
+        this.instances.appcontroller.add_menu_option('DOS','option-dos')
+        this.instances.appcontroller.add_menu_option('UNO UNO','option-uno-uno',null,{index : 'option-uno'})
+        this.instances.appcontroller.add_menu_option('UNO DOS','option-uno-dos',null,{index : 'option-uno'})
+        this.instances.appcontroller.add_menu_option('UNO DOS UNO','option-uno-dos-uno',null,{index : 'option-uno-dos'})
+        this.instances.appcontroller.add_menu_option('EXAMPLE DOS','example-option',null,{index : '',appSelector:'example2'})  
+        this.instances.appcontroller.add_menu_option('EXAMPLE DOS DOS','example-optionN-2',null,{index : 'example-option',appSelector:'example2'})  
+        this.instances.appcontroller.add_menu_option('EXAMPLE UNO DOS TRES','example-optionN-2',null)  
+      }, 5000);
+      
+
     });
   }
 };

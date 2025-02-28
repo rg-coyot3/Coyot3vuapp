@@ -2,7 +2,7 @@ import {w2ui, query, w2toolbar} from 'w2ui'
 import { Tools } from '../tools/ctools'
 /**
  * method: add_application_selector(text,id,callbackOnClick,options)
- * method: add_startup_menu_option(text,id,callbackOnClick,options)
+ * method: add_menu_option(text,id,callbackOnClick,options)
  * method: add_layout_selector(text, id, callbackOnClick, options)
  * method: add_toolbar_widget(elinstance, id, callbackOnClick?, options)
  * -- emits
@@ -26,9 +26,10 @@ export class ToolbarManager {
       toolbarMainMenu : { type: 'menu', id: 'main-menu', text: 'APP', style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css),
         items: [
           { text : '--' , id : 'main-menu-sep-02',style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css)},
-          { text: 'About', id : 'main-menu-about' , icon: 'fa fa-camera',style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css)},
+          { text: 'About', id : 'main-menu-about' , icon: 'fa fa-camera',style: Tools.json2cssstring(config.d3sktop.toolbar.style.bar.css) , items : []},
         ]
-      }
+      },
+      appsSelectorsOptions : {}
     }
     this.instances = {
       container : null,
@@ -43,7 +44,6 @@ export class ToolbarManager {
         { type: 'break' , id : "apps-instances-ep"},
         { type: 'break' },
         { type: 'spacer' , id : "spacer-a"},
-        { type: 'break' },
         { type: 'break' , id : "layouts-selectors-ep"},
         { type: 'break' , id : "rightest-zone"},
       ]
@@ -81,6 +81,7 @@ export class ToolbarManager {
     this.instances.container.insert("layouts-selectors-ep",v);
   }
   __defer_til_rendered(func,...args){
+    //console.log(`TEST15- deferring til rendered: [${JSON.stringify(...args)}]`)
     if(this.vars.im_rendered === true)return false;
     setTimeout(() => {
       console.log(`CTOOLBAR : DEFERRED ACTION : `);
@@ -109,10 +110,12 @@ export class ToolbarManager {
         await event.complete;
         query(this.box).find(`#tb_${self.config.source.d3sktop.toolbar.id}_item_${id}`).append(element);
       }
-      
     }
     this.instances.container.insert("rightest-zone",v);
   }
+
+
+
   add_application_selector(text,id,callbackOnClick,options){
     if(this.__defer_til_rendered(
       this.add_application_selector.bind(this),
@@ -128,54 +131,105 @@ export class ToolbarManager {
       onClick : (callbackOnClick === undefined?null:callbackOnClick),
       style : Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.selectors.css)
     }
+    this.config.appsSelectorsOptions[v.id] = {...v};
     if(this.instances.container== null) {this.vars.toolbarItems.push(v);return;}
+    console.log(`TEST15- CTOOLBAR-ADD APPS SELECOR OPTIONS FOR [${v.id}]((${JSON.stringify(this.config.appsSelectorsOptions)}))`)
+    
     this.instances.container.insert("apps-instances-ep",v);
   }  
-  add_application_selector_(text,id,callbackOnClick,options){
+  __search_index_for_start_menu_option(index,o){
+    let obj = null;
+    if(o.items == null)return null;
+    o.items.forEach( opt => {
+      
+      if(obj !== null)return;
+      console.log(`checking [${opt.id}] == [${index}]? (${opt.id == index})`)
+      if(opt.id == index) { 
+        console.log(`found [${index}]`)
+        obj = opt; 
+        if(opt.items == undefined)
+        {
+          opt.items = [];
+          opt.type = 'menu';
+        }
+        return;
+      }else{
+        obj = this.__search_index_for_start_menu_option(index,opt); 
+      }
+    });
+    return obj;
+  }
+  add_menu_option(text,id,callback,options){
     if(this.__defer_til_rendered(
-      this.add_application_selector.bind(this),
+      this.add_menu_option.bind(this),
       text,
       id,
-      callbackOnClick,
-      options)== true)
+      callback,
+      options) == true)
     return true;
-
-    let v = {
-      type : 'button',
-      id   : id,
-      text : text,
-      onClick : (callbackOnClick === undefined?null:callbackOnClick)
-      
-
-
-    }
-    if(this.instances.container== null) {this.vars.toolbarItems.push(v);return;}
-    this.instances.container.add(v);
-  }
-  add_startup_menu_option(text,id,callback,options){
     let v = {
       type : 'button',
       id   : id,
       text : text,
       onClick : (callback === undefined?null : callback)
     }
-    if(this.config.toolbarMainMenu.items.length == 1){
-      let w = {type : 'break'};
-      this.config.toolbarMainMenu.items = [w].concat(this.config.toolbarMainMenu.items);
-    } 
-    this.config.toolbarMainMenu.items = [v].concat(this.config.toolbarMainMenu.items);
+
+    let indexInstanceConf;
+    //console.log(`TEST15- buscando : ${JSON.stringify(options)} || ${JSON.stringify(this.config.appsSelectorsOptions)}`)
+    let getItFromBar = false;
+
+    // SLEECT THE GOOD BUTTON
+    if(options == null)options = {};
+    if(options.appSelector == undefined){
+      indexInstanceConf = this.config.toolbarMainMenu;
+    }
+    else if(this.config.appsSelectorsOptions[options.appSelector] == undefined){
+      indexInstanceConf = this.config.toolbarMainMenu;
+    }else{
+      indexInstanceConf = this.config.appsSelectorsOptions[options.appSelector];
+      if(indexInstanceConf.type != 'menu'){
+        indexInstanceConf.type = 'menu';
+        indexInstanceConf.items = [];
+        console.log(`TEST15- REDRAWING!!!`)
+        this.instances.container.get(indexInstanceConf.id).items = [];
+        this.instances.container.get(indexInstanceConf.id).type = 'menu';
+        this.instances.container.refresh();
+      }
+    }
+    let indexObject;
+    if(options.index != null){
+      indexObject = this.__search_index_for_start_menu_option(options.index,indexInstanceConf)
+    }else{
+      indexObject = indexInstanceConf;
+    }
+    if(indexObject == null) indexObject = indexInstanceConf;
+    if(indexObject == indexInstanceConf){
+      getItFromBar = true;
+    }
+    indexObject.items = [v].concat(indexObject.items);
+    if(this.instances.container == null)return;
+    if(getItFromBar == true){
+      this.instances.container.get(indexObject.id).items = indexObject.items;
+    }
+
+
+    return;
+
+    indexObject.items = [v].concat(indexObject.items);
     if(this.instances.container== null) {return;}
-    this.instances.container.get('main-menu').items = this.config.toolbarMainMenu.items;
+    console.log(`getting ${indexObject.id}, and appending ((${JSON.stringify(indexObject,null,`\t`)}))`)
+    try{this.instances.container.get(indexObject.id).items = indexObject.items;}
+    catch(err){console.warn(`*** - to debug... why this works even if: [${err.toString()}]`);}
     this.instances.container.refresh();
   }
   appcontroller(c){if(c !== undefined)this.controller = c; 
     if(this.controller != undefined){
-      this.controller.add_startup_menu_option = this.add_startup_menu_option.bind(this);
+      this.controller.add_menu_option = this.add_menu_option.bind(this);
       this.controller.add_application_selector = this.add_application_selector.bind(this);
       this.controller.add_layout_selector = this.add_layout_selector.bind(this);
       this.controller.add_toolbar_widget = this.add_toolbar_widget.bind(this);
       this.controller.on('add-window-selector', this.add_application_selector.bind(this) )
-      this.controller.on('add-startup-option', this.add_startup_menu_option.bind(this) )
+      this.controller.on('add-startup-option', this.add_menu_option.bind(this) )
       
     }
     return this.controller;
@@ -203,10 +257,8 @@ export class ToolbarManager {
         items: self.vars.toolbarItems
         ,onRender(event){
           console.log(`CTOOLBAR I'M RENDERED`)
-          self.vars.im_rendered = true;
-          self.vars.initialized = true;
           if(self.onRendered === undefined)return;
-          self.onRendered();
+          
         }
         ,onClick(event){
           console.log(`ctoolbar : clicked : [${event.target}]`)
@@ -215,6 +267,8 @@ export class ToolbarManager {
 
         }
         ,onRefresh : function(evt){
+          self.vars.im_rendered = true;
+          self.vars.initialized = true;
 
         },
         style : Tools.json2cssstring(this.config.source.d3sktop.toolbar.style.bar.css)

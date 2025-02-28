@@ -283,11 +283,11 @@
       "locked": false,
       "fontSize": 16,
       "fontFamily": 1,
-      "text": "add_startup_menu_option(text,id,callback,options)",
+      "text": "add_menu_option(text,id,callback,options)",
       "textAlign": "left",
       "verticalAlign": "middle",
       "containerId": "EtWu6vnEXEkT1Owv6HjMm",
-      "originalText": "add_startup_menu_option(text,id,callback,options)",
+      "originalText": "add_menu_option(text,id,callback,options)",
       "lineHeight": 1.25,
       "baseline": 14
     },
